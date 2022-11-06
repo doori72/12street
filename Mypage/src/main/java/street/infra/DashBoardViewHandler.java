@@ -48,7 +48,7 @@ public class DashBoardViewHandler {
             if (dashBoardOptional.isPresent()) {
                 DashBoard dashBoard = dashBoardOptional.get();
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                dashBoard.setStatus(배송시작);
+                dashBoard.setStatus("배송시작");
                 // view 레파지 토리에 save
                 dashBoardRepository.save(dashBoard);
             }
@@ -71,7 +71,7 @@ public class DashBoardViewHandler {
             if (dashBoardOptional.isPresent()) {
                 DashBoard dashBoard = dashBoardOptional.get();
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                dashBoard.setStatus(주문취소);
+                dashBoard.setStatus("주문취소");
                 // view 레파지 토리에 save
                 dashBoardRepository.save(dashBoard);
             }
