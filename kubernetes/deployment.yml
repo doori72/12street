@@ -1,0 +1,162 @@
+---
+  apiVersion: "apps/v1"
+  kind: "Deployment"
+  metadata: 
+    name: "core"
+    labels: 
+      app: "core"
+  spec: 
+    selector: 
+      matchLabels: 
+        app: "core"
+    replicas: 1
+    template: 
+      metadata: 
+        labels: 
+          app: "core"
+      spec: 
+        containers: 
+          - 
+            name: "core"
+            image: "core"
+            ports: 
+              - 
+                containerPort: 8080
+            readinessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 10
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 10
+            livenessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 120
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 5
+---
+  apiVersion: "v1"
+  kind: "Service"
+  metadata: 
+    name: "core"
+    labels: 
+      app: "core"
+  spec: 
+    ports: 
+      - 
+        port: 8080
+        targetPort: 8080
+    selector: 
+      app: "core"
+---
+  apiVersion: "apps/v1"
+  kind: "Deployment"
+  metadata: 
+    name: "supporting"
+    labels: 
+      app: "supporting"
+  spec: 
+    selector: 
+      matchLabels: 
+        app: "supporting"
+    replicas: 1
+    template: 
+      metadata: 
+        labels: 
+          app: "supporting"
+      spec: 
+        containers: 
+          - 
+            name: "supporting"
+            image: "supporting"
+            ports: 
+              - 
+                containerPort: 8080
+            readinessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 10
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 10
+            livenessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 120
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 5
+---
+  apiVersion: "v1"
+  kind: "Service"
+  metadata: 
+    name: "supporting"
+    labels: 
+      app: "supporting"
+  spec: 
+    ports: 
+      - 
+        port: 8080
+        targetPort: 8080
+    selector: 
+      app: "supporting"
+---
+  apiVersion: "apps/v1"
+  kind: "Deployment"
+  metadata: 
+    name: "mypage"
+    labels: 
+      app: "mypage"
+  spec: 
+    selector: 
+      matchLabels: 
+        app: "mypage"
+    replicas: 1
+    template: 
+      metadata: 
+        labels: 
+          app: "mypage"
+      spec: 
+        containers: 
+          - 
+            name: "mypage"
+            image: "mypage"
+            ports: 
+              - 
+                containerPort: 8080
+            readinessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 10
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 10
+            livenessProbe: 
+              httpGet: 
+                path: "/actuator/health"
+                port: 8080
+              initialDelaySeconds: 120
+              timeoutSeconds: 2
+              periodSeconds: 5
+              failureThreshold: 5
+---
+  apiVersion: "v1"
+  kind: "Service"
+  metadata: 
+    name: "mypage"
+    labels: 
+      app: "mypage"
+  spec: 
+    ports: 
+      - 
+        port: 8080
+        targetPort: 8080
+    selector: 
+      app: "mypage"
